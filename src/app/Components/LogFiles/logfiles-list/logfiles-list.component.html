@@ -1,0 +1,24 @@
+<div class="container my-5">
+  <h1 class="mb-3">List of log files</h1>
+    <table class="table" *ngIf="logfiles && logfiles.length>0">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Serial number</th>
+            <th scope="col">Workstation</th>
+            <th scope="col">Status</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let logfile of logfiles">
+            <td>{{logfile.id}}</td>
+            <td>{{logfile.serialNumber}}</td>
+            <td>{{logfile.workstation}}</td>
+            <td>{{logfile.status}}</td>
+            <td><a [routerLink]="['/logfiles', 'edit', logfile.id]">View</a></td>
+          </tr>
+        </tbody>
+      </table>
+      <p *ngIf="!logfiles || logfiles.length <=0">No log files found</p>
+</div>

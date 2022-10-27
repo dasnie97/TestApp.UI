@@ -1,0 +1,26 @@
+<div class="container my-5">
+    <h1 class="mb-3">Add new log file</h1>
+
+    <div class="row">
+        <div class="col-4">
+            <form #form ="ngForm" (ngSubmit)="addLogFile()">
+                <div class="mb-3">
+                  <label for="serialNumber" class="form-label">Serial number</label>
+                  <input type="text" class="form-control" id="serialNumber" name="serialNumber"
+                  [(ngModel)] = "addLogFileRequest.serialNumber">
+                </div>
+                <div class="mb-3">
+                  <label for="workstation" class="form-label">Workstation</label>
+                  <input type="text" class="form-control" id="workstation" name="workstation"
+                  [(ngModel)] = "addLogFileRequest.workstation">
+                </div>
+                <div class="mb-3">
+                    <label for="status" class="form-label">Status</label>
+                    <input type="text" class="form-control" id="status" name="status"
+                    [(ngModel)] = "addLogFileRequest.status">
+                  </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+              </form>
+        </div>
+    </div>
+</div>
