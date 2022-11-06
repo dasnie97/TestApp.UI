@@ -1,0 +1,29 @@
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Workstation</th>
+      <th scope="col">Problem</th>
+      <th scope="col">Action</th>
+      <th scope="col">Technician</th>
+      <th scope="col">Operator</th>
+      <th scope="col">Time</th>
+      <th scope="col">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let problem of problems; let i=index">
+      <td>{{i+1}}</td>
+      <td>{{problem.workstation}}</td>
+      <td>{{problem.problem}}</td>
+      <td>{{problem.action}}</td>
+      <td>{{problem.technician}}</td>
+      <td>{{problem.operator}}</td>
+      <td>{{problem.time}}</td>
+      <td>{{problem.status}}</td>
+      </tr>
+  </tbody>
+</table>
+
