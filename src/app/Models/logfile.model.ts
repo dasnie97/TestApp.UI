@@ -1,7 +1,11 @@
 export interface LogFile
 {
     id:number,
-    serialNumber:string,
     workstation:string,
-    status:string
+    serialNumber:string,
+    status:string,
+    fixtureSocket:string,
+    failure:string,
+    operator:string,
+    testDateTimeStarted:Date
 }

@@ -12,9 +12,13 @@ export class EditLogfileComponent implements OnInit {
 
   logFile:LogFile = {
     id:0,
-    serialNumber:'',
-    workstation:'',
-    status:''
+    workstation:"",
+    serialNumber:"",
+    status:"",
+    fixtureSocket:"",
+    failure:"",
+    operator:"",
+    testDateTimeStarted: new Date()
   }
   constructor(private route: ActivatedRoute, private logFileService: LogfilesService, private router: Router) { }
 

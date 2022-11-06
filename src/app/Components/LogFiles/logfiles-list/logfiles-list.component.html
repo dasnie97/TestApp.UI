@@ -1,24 +1,45 @@
-<div class="container my-5">
-  <h1 class="mb-3">List of log files</h1>
-    <table class="table" *ngIf="logfiles && logfiles.length>0">
-        <thead>
-          <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Serial number</th>
-            <th scope="col">Workstation</th>
-            <th scope="col">Status</th>
-            <th scope="col"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let logfile of logfiles">
-            <td>{{logfile.id}}</td>
-            <td>{{logfile.serialNumber}}</td>
-            <td>{{logfile.workstation}}</td>
-            <td>{{logfile.status}}</td>
-            <td><a [routerLink]="['/logfiles', 'edit', logfile.id]">View</a></td>
-          </tr>
-        </tbody>
-      </table>
-      <p *ngIf="!logfiles || logfiles.length <=0">No log files found</p>
+<div class="container-fluid my-1" style="font-size: 12px">
+  <table class="table table-hover table-bordered table-sm " *ngIf="logfiles && logfiles.length>0">
+      <thead class="table-info">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">
+            <select class="form-control form-control-sm" id="workstationFilter" [(ngModel)]="workstationFilter">
+            <option *ngFor="let workstation of workstations;">{{workstation}}</option>
+            </select>
+          </th>
+          <th scope="col">
+            <input type="text" class="form-control form-control-sm" id="serialNumberFilter" placeholder="Serial number">
+          </th>
+          <th scope="col">
+            <select class="form-control form-control-sm">
+              <option>All results</option>
+            </select>
+          </th>
+          <th scope="col" style="width: 3%">
+            <input type="text" class="form-control form-control-sm" id="dutFilter" placeholder="DUT">
+          </th>
+          <th scope="col">
+            <input type="text" class="form-control form-control-sm" id="failureFilter" placeholder="Failure">
+          </th>
+          <th scope="col">
+            <input type='text' class="form-control" id='datetimepicker4' />
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let logfile of logfiles; let i=index" [ngClass]="logfile.status == 'Passed' ? 'table-success' : 'table-danger'">
+          <td>{{i+1}}</td>
+          <td>{{logfile.workstation}}</td>
+          <td>{{logfile.serialNumber}}</td>
+          <td>{{logfile.status}}</td>
+          <td>{{logfile.fixtureSocket}}</td>
+          <td>{{logfile.failure}}</td>
+          <td>{{logfile.testDateTimeStarted}}</td>
+          <td><a [routerLink]="['/logfiles', 'edit', logfile.id]">View</a></td>
+        </tr>
+      </tbody>
+    </table>
+    <p *ngIf="!logfiles || logfiles.length <=0">No log files found</p>
 </div>

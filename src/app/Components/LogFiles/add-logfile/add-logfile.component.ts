@@ -12,9 +12,13 @@ export class AddLogfileComponent implements OnInit {
 
   addLogFileRequest:LogFile = {
     id:0,
-    serialNumber:'',
-    workstation:'',
-    status:''
+    workstation:"",
+    serialNumber:"",
+    status:"",
+    fixtureSocket:"",
+    failure:"",
+    operator:"",
+    testDateTimeStarted: new Date()
   }
   constructor(private logFileService: LogfilesService, private router: Router) { }
 

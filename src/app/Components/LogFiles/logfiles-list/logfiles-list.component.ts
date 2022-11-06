@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { TitleStrategy } from '@angular/router';
 import { LogFile } from 'src/app/Models/logfile.model';
 import { LogfilesService } from 'src/app/Services/logfiles.service';
 
@@ -13,6 +12,9 @@ export class LogfilesListComponent implements OnInit {
   constructor(private logfileService:LogfilesService) { }
 
   logfiles: LogFile[] = [];
+  workstations: string[] = [];
+  workstationFilter: string = "All workstations";
+
   ngOnInit(): void {
     this.logfileService.getAllLogfiles().subscribe(
       {
@@ -25,6 +27,19 @@ export class LogfilesListComponent implements OnInit {
         }
       }
     );
+    this.logfileService.getAllWorkstations().subscribe(
+      {
+        next:(workstations)=>
+        {
+          this.workstations = workstations;
+          this.workstations.splice(0, 0, 'All workstations');
+        },
+        error:(response)=>
+        {
+          console.log(response);
+        }
+      }
+    )
   }
 
 }
