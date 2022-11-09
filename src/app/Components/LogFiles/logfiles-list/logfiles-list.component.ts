@@ -42,4 +42,19 @@ export class LogfilesListComponent implements OnInit {
     )
   }
 
+  workstationChange()
+  {
+    this.logfileService.getFilteredLogFiles(this.workstationFilter).subscribe(
+      {
+        next:(logfiles)=>{
+          this.logfiles = logfiles;
+        },
+        error:(response)=>
+        {
+          console.log(response);
+        }
+      }
+    );
+  }
+
 }

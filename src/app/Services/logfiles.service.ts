@@ -36,9 +36,9 @@ export class LogfilesService {
   {
     return this.http.get<string[]>(this.baseApiUrl + '/api/LogFile/workstations');
   }
-  // getFilteredLogFiles(workstation:string, serialNumber:string, result:string, dut:string, failure:string):Observable<LogFile[]>
-  // {
-  //   return LogFile
-  // }
+  getFilteredLogFiles(workstation:string, serialNumber?:string, result?:string, dut?:string, failure?:string):Observable<LogFile[]>
+  {
+    return this.http.get<LogFile[]>(this.baseApiUrl + '/api/LogFile/filter?workstation='+workstation);
+  }
 }
  

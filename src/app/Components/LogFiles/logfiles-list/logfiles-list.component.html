@@ -4,8 +4,8 @@
         <tr>
           <th scope="col">#</th>
           <th scope="col">
-            <select class="form-control form-control-sm" id="workstationFilter" [(ngModel)]="workstationFilter">
-            <option *ngFor="let workstation of workstations;">{{workstation}}</option>
+            <select class="form-control form-control-sm" id="workstationFilter" [(ngModel)]="workstationFilter" (change)="workstationChange()">
+              <option *ngFor="let workstation of workstations;">{{workstation}}</option>
             </select>
           </th>
           <th scope="col">
