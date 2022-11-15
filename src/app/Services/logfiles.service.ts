@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { idText } from 'typescript';
 import { LogFile } from '../Models/logfile.model';
+import { YieldPoint } from '../Models/yield-point.model';
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +40,11 @@ export class LogfilesService {
   getFilteredLogFiles(workstation:string, serialNumber?:string, result?:string, dut?:string, failure?:string):Observable<LogFile[]>
   {
     return this.http.get<LogFile[]>(this.baseApiUrl + '/api/LogFile/filter?workstation='+workstation);
+  }
+  getYieldPoints():Observable<{[workstation:string]:YieldPoint[]}>
+  {
+    var temp = this.http.get<{[workstation:string]:YieldPoint[]}>(this.baseApiUrl + '/api/LogFile/yield');
+    return temp;
   }
 }
  
