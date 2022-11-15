@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
+import { YieldPoint } from 'src/app/Models/yield-point.model';
+import { LogfilesService } from 'src/app/Services/logfiles.service';
 Chart.register(...registerables);
 
 @Component({
@@ -9,10 +11,34 @@ Chart.register(...registerables);
 })
 export class ChartComponent implements OnInit {
 
-  constructor() { }
+  yp:YieldPoint[]=[
+    {
+      dateAndTime:new Date(),
+      yield:0,
+      total:0,
+      passed:0,
+      failed:0
+    }
+  ]
+  yieldPointsBuffor:{[workstation:string]:YieldPoint[]}={
+    "husqv": this.yp,
+  };
+
+  constructor(private logfileService:LogfilesService) { }
 
   ngOnInit(): void {
-    this.RenderChart();
+
+    this.logfileService.getYieldPoints().subscribe(
+      {
+        next:(yieldPoints)=>{
+          this.RenderChart(yieldPoints);
+        },
+        error:(response)=>
+        {
+          console.log(response);
+        }
+      }
+    );
   }
 
   COLORS = [
@@ -28,8 +54,7 @@ export class ChartComponent implements OnInit {
     "#ffdead",
   ];
 
-
-  RenderChart()
+  RenderChart(yieldPoints:{[workstation:string]:YieldPoint[]})
   {
     const data = {
       datasets: [],
@@ -53,6 +78,29 @@ export class ChartComponent implements OnInit {
       },
     };
 
-    const myChart = new Chart("FPYChart", config);
+    const FPYChart = new Chart("FPYChart", config);
+
+    var color = 0;
+    
+    for (let [TesterName, DataSet] of Object.entries(yieldPoints)) {
+      const newDataset = {
+        label: TesterName,
+        backgroundColor: this.COLORS[color],
+        borderColor: this.COLORS[color],
+        data: new Array(),
+      };
+  
+      DataSet.forEach(yP => {
+        if (yP.yield != null) {
+          newDataset.data.push({ x: yP.dateAndTime, y: yP.yield * 100 });
+        } else {
+          newDataset.data.push({ x: yP.dateAndTime, y: null });
+        }
+      });
+  
+      FPYChart.data.datasets.push(newDataset);
+      color++;
+    }
+    FPYChart.update();
   }
 }
