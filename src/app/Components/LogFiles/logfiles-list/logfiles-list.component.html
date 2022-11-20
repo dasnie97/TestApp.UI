@@ -23,9 +23,9 @@
             <input type="text" class="form-control form-control-sm" id="failureFilter" placeholder="Failure">
           </th>
           <th scope="col">
-            <input type='text' class="form-control" id='datetimepicker4' />
+            <app-datetimepicker placeholder="From" [initialValue]="fromDateTime" (dateValue)="fromDateTimeChange($event)"></app-datetimepicker>
+            <app-datetimepicker placeholder="To" [initialValue]="toDateTime" (dateValue)="toDateTimeChange($event)"></app-datetimepicker>
           </th>
-          <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
@@ -37,7 +37,7 @@
           <td>{{logfile.fixtureSocket}}</td>
           <td>{{logfile.failure}}</td>
           <td>{{logfile.testDateTimeStarted}}</td>
-          <td><a [routerLink]="['/logfiles', 'edit', logfile.id]">View</a></td>
+          <!--<td><a [routerLink]="['/logfiles', 'edit', logfile.id]">View</a></td>-->
         </tr>
       </tbody>
     </table>

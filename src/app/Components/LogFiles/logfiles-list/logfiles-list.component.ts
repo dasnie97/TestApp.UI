@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LogFile } from 'src/app/Models/logfile.model';
 import { LogfilesService } from 'src/app/Services/logfiles.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-logfiles-list',
@@ -14,6 +15,8 @@ export class LogfilesListComponent implements OnInit {
   logfiles: LogFile[] = [];
   workstations: string[] = [];
   workstationFilter: string = "All workstations";
+  fromDateTime:moment.Moment = moment().subtract(1, 'day');
+  toDateTime:moment.Moment = moment();
 
   ngOnInit(): void {
     this.logfileService.getAllLogfiles().subscribe(
@@ -57,4 +60,13 @@ export class LogfilesListComponent implements OnInit {
     );
   }
 
+  fromDateTimeChange(dateTime:moment.Moment)
+  {
+    this.fromDateTime = dateTime;
+  }
+
+  toDateTimeChange(dateTime:moment.Moment)
+  {
+    this.toDateTime = dateTime;
+  }
 }
