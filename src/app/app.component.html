@@ -1,21 +1,20 @@
-<div class="container-12 my-4 mx-5 border border-primary">
-
+<div class="container-12 my-4 mx-5">
   <div class="row">
     <div class="col-lg-12">
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-              <a class="nav-link" routerLink="logfiles">Read</a>
+              <!--<a class="nav-link" routerLink="logfiles">Read</a>-->
             </li>
             <li class="nav-item">
-              <a class="nav-link" routerLink="logfiles/add">Create</a>
+              <!--<a class="nav-link" routerLink="logfiles/add">Create</a>-->
             </li>
             <li class="nav-item">
-              <a class="nav-link" routerLink="#">Update</a>
+              <!--<a class="nav-link" routerLink="#">Update</a>-->
             </li>
             <li class="nav-item">
-              <a class="nav-link" routerLink="#">Delete</a>
+              <!--<a class="nav-link" routerLink="#">Delete</a>-->
             </li>
           </ul>
         </div>
@@ -24,24 +23,15 @@
   </div>
 
   <div class="row">
-    <div class="col-6 border ">
+    <div class="col-5">
       <app-map></app-map>
     </div>
-    <div class="col-6">
-      <div class="row">
-        <div class="col-12 border">
-          <app-chart></app-chart>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-12 border">
-          <app-crashlogs></app-crashlogs>
-        </div>
-      </div>
+    <div class="col-7">
+      <app-chart></app-chart>
     </div>
   </div>
   <div class="row">
-    <div class="col border">
+    <div class="col">
       <app-logfiles-list></app-logfiles-list>
     </div>
   </div>  
