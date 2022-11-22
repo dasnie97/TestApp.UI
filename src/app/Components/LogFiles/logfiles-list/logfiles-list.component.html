@@ -4,9 +4,10 @@
         <tr>
           <th scope="col">#</th>
           <th scope="col">
-            <select class="form-control form-control-sm" id="workstationFilter" [(ngModel)]="workstationFilter" (change)="workstationChange()">
+            <!--<select class="form-control form-control-sm" id="workstationFilter" [(ngModel)]="workstationFilter" (change)="workstationChange()">
               <option *ngFor="let workstation of workstations;">{{workstation}}</option>
-            </select>
+            </select>-->
+            <app-drop-down></app-drop-down>
           </th>
           <th scope="col">
             <input type="text" class="form-control form-control-sm" id="serialNumberFilter" placeholder="Serial number">

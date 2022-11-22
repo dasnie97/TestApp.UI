@@ -22,6 +22,7 @@ import { MapComponent } from './Components/map/map.component';
 import { ChartComponent } from './Components/chart/chart.component';
 import { DatetimepickerComponent } from './Components/datetimepicker/datetimepicker.component';
 import { NgxMatMomentModule } from '@angular-material-components/moment-adapter';
+import { DropDownComponent } from './Components/drop-down/drop-down.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { NgxMatMomentModule } from '@angular-material-components/moment-adapter'
     MapComponent,
     ChartComponent,
     DatetimepickerComponent,
+    DropDownComponent,
   ],
   imports: [
     NgxMatMomentModule,
