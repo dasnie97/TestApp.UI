@@ -1,8 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { idText } from 'typescript';
 import { LogFile } from '../Models/logfile.model';
 import { YieldPoint } from '../Models/yield-point.model';
 
@@ -33,13 +32,38 @@ export class LogfilesService {
   {
     return this.http.delete<LogFile>(this.baseApiUrl + '/api/LogFile?id=' + id);
   }
-  getAllWorkstations():Observable<string[]>
+  getAllWorkstations():Observable<any[]>
   {
-    return this.http.get<string[]>(this.baseApiUrl + '/api/LogFile/workstations');
+    var output:{name:string, checked:boolean}[] = [];
+    var response = this.http.get<string[]>(this.baseApiUrl + '/api/LogFile/workstations');
+    response.subscribe(
+      {
+        next:(workstations)=>
+        {
+          for (let i = 0; i < workstations.length; i++) {
+            const element = workstations[i];
+            output.push({name:element, checked:false});
+          }
+        },
+        error:(response)=>
+        {
+          console.log(response);
+        }
+      }
+    );
+    return of(output);
   }
-  getFilteredLogFiles(workstation:string, serialNumber?:string, result?:string, dut?:string, failure?:string):Observable<LogFile[]>
+  getFilteredLogFiles(filters:{key:string, value:string[]}[]):Observable<LogFile[]>
   {
-    return this.http.get<LogFile[]>(this.baseApiUrl + '/api/LogFile/filter?workstation='+workstation);
+    var options = new HttpParams();
+    filters.forEach(filter => {
+      if (filter.value) {
+        filter.value.forEach(filterValue => {
+          options = options.append(filter.key, filterValue);
+        })
+      }
+    });
+    return this.http.get<LogFile[]>(this.baseApiUrl + '/api/LogFile', {params: options});
   }
   getYieldPoints():Observable<{[workstation:string]:YieldPoint[]}>
   {

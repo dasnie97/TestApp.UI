@@ -1,35 +1,34 @@
 <div class="container-fluid my-1" style="font-size: 12px">
-  <table class="table table-hover table-bordered table-sm " *ngIf="logfiles && logfiles.length>0">
+  <table class="table table-hover table-bordered table-sm ">
       <thead class="table-info">
         <tr>
           <th scope="col">#</th>
           <th scope="col">
-            <!--<select class="form-control form-control-sm" id="workstationFilter" [(ngModel)]="workstationFilter" (change)="workstationChange()">
-              <option *ngFor="let workstation of workstations;">{{workstation}}</option>
-            </select>-->
-            <app-drop-down></app-drop-down>
+            <app-drop-down [list]="workstations" (shareCheckedList)="workstationFilterChange($event)" (change)="filterResults()"></app-drop-down>
           </th>
           <th scope="col">
-            <input type="text" class="form-control form-control-sm" id="serialNumberFilter" placeholder="Serial number">
+            <input type="text" class="form-control form-control-sm" placeholder="Serial number" [(ngModel)]="serialNumbers" (change)="serialNumberFilterChange($event)" (change)="filterResults()">
           </th>
           <th scope="col">
-            <select class="form-control form-control-sm">
+            <select class="form-control form-control-sm" [(ngModel)] = "result" (change)="resultFilterChanged($event)" (change)="filterResults()">
               <option>All results</option>
+              <option>Passed</option>
+              <option>Failed</option>
             </select>
           </th>
           <th scope="col" style="width: 3%">
-            <input type="text" class="form-control form-control-sm" id="dutFilter" placeholder="DUT">
+            <input type="text" class="form-control form-control-sm" id="dutFilter" placeholder="DUT" [(ngModel)] = "DUT" (keyup)="dutFilterChanged($event)" (keyup)="filterResults()">
           </th>
           <th scope="col">
-            <input type="text" class="form-control form-control-sm" id="failureFilter" placeholder="Failure">
+            <input type="text" class="form-control form-control-sm" id="failureFilter" placeholder="Failure" [(ngModel)] = "failure" (keyup)="failureFilterChanged($event)" (keyup)="filterResults()">
           </th>
           <th scope="col">
-            <app-datetimepicker placeholder="From" [initialValue]="fromDateTime" (dateValue)="fromDateTimeChange($event)"></app-datetimepicker>
-            <app-datetimepicker placeholder="To" [initialValue]="toDateTime" (dateValue)="toDateTimeChange($event)"></app-datetimepicker>
+            <app-datetimepicker placeholder="From" [initialValue]="fromDateTime" (dateValue)="fromDateTimeChange($event)" (dateValue)="filterResults()"></app-datetimepicker>
+            <app-datetimepicker placeholder="To" [initialValue]="toDateTime" (dateValue)="toDateTimeChange($event)" (dateValue)="filterResults()"></app-datetimepicker>
           </th>
         </tr>
       </thead>
-      <tbody>
+      <tbody *ngIf="logfiles && logfiles.length>0">
         <tr *ngFor="let logfile of logfiles; let i=index" [ngClass]="logfile.status == 'Passed' ? 'table-success' : 'table-danger'">
           <td>{{i+1}}</td>
           <td>{{logfile.workstation}}</td>
@@ -37,7 +36,7 @@
           <td>{{logfile.status}}</td>
           <td>{{logfile.fixtureSocket}}</td>
           <td>{{logfile.failure}}</td>
-          <td>{{logfile.testDateTimeStarted}}</td>
+          <td>{{logfile.testDateTimeStarted | date:'dd.MM.yyyy HH:mm'}}</td>
           <!--<td><a [routerLink]="['/logfiles', 'edit', logfile.id]">View</a></td>-->
         </tr>
       </tbody>

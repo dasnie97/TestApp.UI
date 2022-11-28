@@ -49,7 +49,7 @@ export class DatetimepickerComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.setDate(this.initialValue);
+    this.setDate(moment(this.initialValue));
   }
 
   dateChange(value:moment.Moment)
