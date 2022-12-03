@@ -2,14 +2,14 @@
   <table class="table table-hover table-bordered table-sm ">
       <thead class="table-info">
         <tr>
-          <th scope="col">#</th>
-          <th scope="col">
+          <th scope="col" style="width: 0.5%">#</th>
+          <th scope="col" style="width: 1%">
             <app-drop-down [list]="workstations" (shareCheckedList)="workstationFilterChange($event)" (change)="filterResults()"></app-drop-down>
           </th>
-          <th scope="col">
+          <th scope="col" style="width: 1%">
             <input type="text" class="form-control form-control-sm" placeholder="Serial number" [(ngModel)]="serialNumbers" (change)="serialNumberFilterChange($event)" (change)="filterResults()">
           </th>
-          <th scope="col">
+          <th scope="col" style="width: 5%">
             <select class="form-control form-control-sm" [(ngModel)] = "result" (change)="resultFilterChanged($event)" (change)="filterResults()">
               <option>All results</option>
               <option>Passed</option>
@@ -19,10 +19,10 @@
           <th scope="col" style="width: 3%">
             <input type="text" class="form-control form-control-sm" id="dutFilter" placeholder="DUT" [(ngModel)] = "DUT" (keyup)="dutFilterChanged($event)" (keyup)="filterResults()">
           </th>
-          <th scope="col">
+          <th scope="col" style="width: 50%">
             <input type="text" class="form-control form-control-sm" id="failureFilter" placeholder="Failure" [(ngModel)] = "failure" (keyup)="failureFilterChanged($event)" (keyup)="filterResults()">
           </th>
-          <th scope="col">
+          <th scope="col" style="width: 5%">
             <app-datetimepicker placeholder="From" [initialValue]="fromDateTime" (dateValue)="fromDateTimeChange($event)" (dateValue)="filterResults()"></app-datetimepicker>
             <app-datetimepicker placeholder="To" [initialValue]="toDateTime" (dateValue)="toDateTimeChange($event)" (dateValue)="filterResults()"></app-datetimepicker>
           </th>
@@ -31,12 +31,12 @@
       <tbody *ngIf="logfiles && logfiles.length>0">
         <tr *ngFor="let logfile of logfiles; let i=index" [ngClass]="logfile.status == 'Passed' ? 'table-success' : 'table-danger'">
           <td>{{i+1}}</td>
-          <td>{{logfile.workstation}}</td>
-          <td>{{logfile.serialNumber}}</td>
-          <td>{{logfile.status}}</td>
-          <td>{{logfile.fixtureSocket}}</td>
-          <td>{{logfile.failure}}</td>
-          <td>{{logfile.testDateTimeStarted | date:'dd.MM.yyyy HH:mm'}}</td>
+          <td class="px-2">{{logfile.workstation}}</td>
+          <td class="px-2">{{logfile.serialNumber}}</td>
+          <td class="px-2">{{logfile.status}}</td>
+          <td class="px-2">{{logfile.fixtureSocket}}</td>
+          <td class="px-2">{{logfile.failure}}</td>
+          <td class="px-2">{{logfile.testDateTimeStarted | date:'dd.MM.yyyy HH:mm'}}</td>
           <!--<td><a [routerLink]="['/logfiles', 'edit', logfile.id]">View</a></td>-->
         </tr>
       </tbody>
