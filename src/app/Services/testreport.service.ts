@@ -2,40 +2,40 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { LogFile } from '../Models/logfile.model';
 import { YieldPoint } from '../Models/yield-point.model';
+import { TestReport } from '../Models/testreport.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LogfilesService {
+export class TestReportService {
 
   baseApiUrl:string = environment.baseApiUrl;
   constructor(private http:HttpClient) { }
 
-  getAllLogfiles():Observable<LogFile[]>
+  getAllTestReports():Observable<TestReport[]>
   {
-    return this.http.get<LogFile[]>(this.baseApiUrl + '/api/LogFile');
+    return this.http.get<TestReport[]>(this.baseApiUrl + '/api/TestReport');
   }
-  addLogFile(addLogFileRequest: LogFile) :Observable<LogFile>
+  addTestReport(addTestReportRequest: TestReport) :Observable<TestReport>
   {
-    return this.http.post<LogFile>(this.baseApiUrl + '/api/LogFile', addLogFileRequest);
+    return this.http.post<TestReport>(this.baseApiUrl + '/api/TestReport', addTestReportRequest);
   }
-  getLogFile(id:string) : Observable<LogFile>{
-    return this.http.get<LogFile>(this.baseApiUrl + '/api/LogFile/' + id);
+  getTestReport(id:string) : Observable<TestReport>{
+    return this.http.get<TestReport>(this.baseApiUrl + '/api/TestReport/' + id);
   }
-  updateLogFile(updateLogFileRequest: LogFile) : Observable<LogFile>
+  updateTestReport(updateTestReportRequest: TestReport) : Observable<TestReport>
   {
-    return this.http.put<LogFile>(this.baseApiUrl + '/api/LogFile', updateLogFileRequest);
+    return this.http.put<TestReport>(this.baseApiUrl + '/api/TestReport', updateTestReportRequest);
   }
-  deleteLogFile(id:string) : Observable<LogFile>
+  deleteTestReport(id:string) : Observable<TestReport>
   {
-    return this.http.delete<LogFile>(this.baseApiUrl + '/api/LogFile?id=' + id);
+    return this.http.delete<TestReport>(this.baseApiUrl + '/api/TestReport?id=' + id);
   }
   getAllWorkstations():Observable<any[]>
   {
     var output:{name:string, checked:boolean}[] = [];
-    var response = this.http.get<string[]>(this.baseApiUrl + '/api/LogFile/workstations');
+    var response = this.http.get<string[]>(this.baseApiUrl + '/api/TestReport/workstations');
     response.subscribe(
       {
         next:(workstations)=>
@@ -53,7 +53,7 @@ export class LogfilesService {
     );
     return of(output);
   }
-  getFilteredLogFiles(filters:{key:string, value:string[]}[]):Observable<LogFile[]>
+  getFilteredTestReports(filters:{key:string, value:string[]}[]):Observable<TestReport[]>
   {
     var options = new HttpParams();
     filters.forEach(filter => {
@@ -63,11 +63,11 @@ export class LogfilesService {
         })
       }
     });
-    return this.http.get<LogFile[]>(this.baseApiUrl + '/api/LogFile', {params: options});
+    return this.http.get<TestReport[]>(this.baseApiUrl + '/api/TestReport', {params: options});
   }
   getYieldPoints():Observable<{[workstation:string]:YieldPoint[]}>
   {
-    var temp = this.http.get<{[workstation:string]:YieldPoint[]}>(this.baseApiUrl + '/api/LogFile/yield');
+    var temp = this.http.get<{[workstation:string]:YieldPoint[]}>(this.baseApiUrl + '/api/TestReport/yield');
     return temp;
   }
 }

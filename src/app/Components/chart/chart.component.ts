@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
 import { YieldPoint } from 'src/app/Models/yield-point.model';
-import { LogfilesService } from 'src/app/Services/logfiles.service';
+import { TestReportService } from 'src/app/Services/testreport.service';
 Chart.register(...registerables);
 
 @Component({
@@ -24,11 +24,11 @@ export class ChartComponent implements OnInit {
     "husqv": this.yp,
   };
 
-  constructor(private logfileService:LogfilesService) { }
+  constructor(private TestReportService:TestReportService) { }
 
   ngOnInit(): void {
 
-    this.logfileService.getYieldPoints().subscribe(
+    this.TestReportService.getYieldPoints().subscribe(
       {
         next:(yieldPoints)=>{
           this.RenderChart(yieldPoints);

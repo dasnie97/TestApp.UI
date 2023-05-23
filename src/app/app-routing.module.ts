@@ -1,25 +1,25 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AddLogfileComponent } from './Components/LogFiles/add-logfile/add-logfile.component';
-import { EditLogfileComponent } from './Components/LogFiles/edit-logfile/edit-logfile.component';
-import { LogfilesListComponent } from './Components/LogFiles/logfiles-list/logfiles-list.component';
+import { AddTestReportComponent } from './Components/TestReports/add-testreport/add-testreport.component';
+import { EditTestReportComponent } from './Components/TestReports/edit-testreport/edit-testreport.component';
+import { TestReportListComponent } from './Components/TestReports/testreport-list/testreport-list.component';
 
 const routes: Routes = [
   {
     path: '',
-    component:LogfilesListComponent
+    component:TestReportListComponent
   },
   {
     path: 'logfiles',
-    component:LogfilesListComponent
+    component:TestReportListComponent
   },
   {
     path: 'logfiles/add',
-    component:AddLogfileComponent
+    component:AddTestReportComponent
   },
   {
     path: 'logfiles/edit/:id',
-    component:EditLogfileComponent
+    component:EditTestReportComponent
   }
 ];
 

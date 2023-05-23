@@ -3,6 +3,19 @@ display: inline-block;
 position:relative
 }
 
+.Idle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  display:block;
+  transform: translate(-50%, -50%);
+  background-color: rgb(196, 191, 191);
+  border-radius: 50%;
+  height: 25px;
+  width: 25px;
+}
+
 .Running {
     position: absolute;
     top: 0;

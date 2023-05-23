@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { LogFile } from 'src/app/Models/logfile.model';
-import { LogfilesService } from 'src/app/Services/logfiles.service';
+import { TestReport } from 'src/app/Models/testreport.model';
+import { TestReportService } from 'src/app/Services/testreport.service';
 
 @Component({
-  selector: 'app-edit-logfile',
-  templateUrl: './edit-logfile.component.html',
-  styleUrls: ['./edit-logfile.component.css']
+  selector: 'app-edit-testreport',
+  templateUrl: './edit-testreport.component.html',
+  styleUrls: ['./edit-testreport.component.css']
 })
-export class EditLogfileComponent implements OnInit {
+export class EditTestReportComponent implements OnInit {
 
-  logFile:LogFile = {
+  logFile:TestReport = {
     id:0,
     workstation:"",
     serialNumber:"",
@@ -20,7 +20,7 @@ export class EditLogfileComponent implements OnInit {
     operator:"",
     testDateTimeStarted: new Date()
   }
-  constructor(private route: ActivatedRoute, private logFileService: LogfilesService, private router: Router) { }
+  constructor(private route: ActivatedRoute, private logFileService: TestReportService, private router: Router) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe({
@@ -28,7 +28,7 @@ export class EditLogfileComponent implements OnInit {
         const id = params.get('id');
         if (id)
         {
-          this.logFileService.getLogFile(id).subscribe({
+          this.logFileService.getTestReport(id).subscribe({
             next:(response) =>
             {
               this.logFile = response;
@@ -41,7 +41,7 @@ export class EditLogfileComponent implements OnInit {
 
   updateLogFile()
   {
-    this.logFileService.updateLogFile(this.logFile).subscribe({
+    this.logFileService.updateTestReport(this.logFile).subscribe({
       next: (response) => {
         this.router.navigate(['logfiles']);
       }
@@ -50,7 +50,7 @@ export class EditLogfileComponent implements OnInit {
 
   deleteLogFile(id:string)
   {
-    this.logFileService.deleteLogFile(id).subscribe({
+    this.logFileService.deleteTestReport(id).subscribe({
       next:(response) => {
         this.router.navigate(['logfiles']);
       }

@@ -1,4 +1,4 @@
-export interface LogFile
+export interface TestReport
 {
     id:number,
     workstation:string,

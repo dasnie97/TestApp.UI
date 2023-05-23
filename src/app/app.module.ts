@@ -13,10 +13,10 @@ import { NgxMatDateFormats, NgxMatDatetimePickerModule, NgxMatNativeDateModule, 
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LogfilesListComponent } from './Components/LogFiles/logfiles-list/logfiles-list.component';
-import { AddLogfileComponent } from './Components/LogFiles/add-logfile/add-logfile.component';
+import { TestReportListComponent } from './Components/TestReports/testreport-list/testreport-list.component';
+import { AddTestReportComponent } from './Components/TestReports/add-testreport/add-testreport.component';
 
-import { EditLogfileComponent } from './Components/LogFiles/edit-logfile/edit-logfile.component';
+import { EditTestReportComponent } from './Components/TestReports/edit-testreport/edit-testreport.component';
 import { CrashlogsComponent } from './Components/crashlogs/crashlogs.component';
 import { MapComponent } from './Components/map/map.component';
 import { ChartComponent } from './Components/chart/chart.component';
@@ -27,9 +27,9 @@ import { DropDownComponent } from './Components/drop-down/drop-down.component';
 @NgModule({
   declarations: [
     AppComponent,
-    LogfilesListComponent,
-    AddLogfileComponent,
-    EditLogfileComponent,
+    TestReportListComponent,
+    AddTestReportComponent,
+    EditTestReportComponent,
     CrashlogsComponent,
     MapComponent,
     ChartComponent,

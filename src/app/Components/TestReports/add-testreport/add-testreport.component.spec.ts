@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddLogfileComponent } from './add-logfile.component';
+import { AddLogfileComponent } from './add-testreport.component';
 
 describe('AddLogfileComponent', () => {
   let component: AddLogfileComponent;
