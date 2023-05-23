@@ -1,0 +1,6 @@
+.tableRow-passed{
+    background-color: #b3f5cd;
+}
+.tableRow-failed{
+    background-color: #f5b3b8;
+}
