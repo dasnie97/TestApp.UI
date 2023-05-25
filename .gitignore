@@ -40,5 +40,5 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
-src/assets/Img/Layout.png
-src/assets/Img/LayoutConverted.png
+src/assets
+src/assets
