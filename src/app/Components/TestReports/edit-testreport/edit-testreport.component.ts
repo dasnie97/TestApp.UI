@@ -18,7 +18,8 @@ export class EditTestReportComponent implements OnInit {
     fixtureSocket:"",
     failure:"",
     operator:"",
-    testDateTimeStarted: new Date()
+    testDateTimeStarted: new Date(),
+    recordCreated: new Date()
   }
   constructor(private route: ActivatedRoute, private logFileService: TestReportService, private router: Router) { }
 

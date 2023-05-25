@@ -7,5 +7,6 @@ export interface TestReport
     fixtureSocket:string,
     failure:string,
     operator:string,
-    testDateTimeStarted:Date
+    testDateTimeStarted:Date,
+    recordCreated:Date
 }
