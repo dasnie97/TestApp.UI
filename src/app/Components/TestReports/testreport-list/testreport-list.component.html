@@ -1,13 +1,13 @@
 <div class="container-fluid my-1" style="font-size: 12px">
-  <table class="table table-hover table-bordered table-sm ">
+  <table class="table table-hover table-bordered table-sm">
       <thead class="table-info">
         <tr>
-          <th scope="col" style="width: 0.5%">#</th>
+          <th scope="col" style="width: 2%">#</th>
           <th scope="col" style="width: 1%">
             <app-drop-down [list]="workstations" (shareCheckedList)="workstationFilterChange($event)" (change)="filterResults()"></app-drop-down>
           </th>
-          <th scope="col" style="width: 1%">
-            <input type="text" class="form-control form-control-sm" placeholder="Serial number" [(ngModel)]="serialNumbers" (change)="serialNumberFilterChange($event)" (change)="filterResults()">
+          <th scope="col" style="width: 15%">
+            <input type="text" class="form-control form-control-sm" placeholder="Serial number" [(ngModel)]="serialNumbers" (keyup)="serialNumberFilterChange($event)" (keyup)="filterResults()">
           </th>
           <th scope="col" style="width: 5%">
             <select class="form-control form-control-sm" [(ngModel)] = "result" (change)="resultFilterChanged($event)" (change)="filterResults()">
@@ -29,17 +29,17 @@
         </tr>
       </thead>
       <tbody *ngIf="logfiles && logfiles.length>0">
-        <tr *ngFor="let logfile of logfiles; let i=index" [ngClass]="getTableRowColor(logfile)">
+        <tr *ngFor="let logfile of logfiles; let i=index" [ngClass]="getTableRowColor(logfile)" class="dotted-table">
           <td>{{i+1}}</td>
-          <td class="px-2">{{logfile.workstation}}</td>
-          <td class="px-2">{{logfile.serialNumber}}</td>
-          <td class="px-2">{{logfile.status}}</td>
-          <td class="px-2">{{logfile.fixtureSocket}}</td>
-          <td class="px-2">{{logfile.failure}}</td>
-          <td class="px-2">{{logfile.testDateTimeStarted | date:'dd.MM.yyyy HH:mm'}}</td>
+          <td>{{logfile.workstation}}</td>
+          <td>{{logfile.serialNumber}}</td>
+          <td>{{logfile.status}}</td>
+          <td>{{logfile.fixtureSocket}}</td>
+          <td>{{logfile.failure}}</td>
+          <td>{{logfile.testDateTimeStarted | date:'dd.MM.yyyy HH:mm'}}</td>
           <!--<td><a [routerLink]="['/logfiles', 'edit', logfile.id]">View</a></td>-->
         </tr>
       </tbody>
     </table>
-    <p *ngIf="!logfiles || logfiles.length <=0">No log files found</p>
+    <p *ngIf="!logfiles || logfiles.length <=0" class="noRecordsFound">No test reports found</p>
 </div>
