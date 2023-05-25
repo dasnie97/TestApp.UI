@@ -4,3 +4,26 @@
 .tableRow-failed{
     background-color: #f5b3b8;
 }
+.dotted-table {
+border-collapse: separate;
+border-spacing: 0;
+border-style: dotted;
+text-align: center;
+font-size: 12px;
+font-family: "lato", sans-serif;
+font-weight: 400;
+}
+.dotted-table td {
+border: 1px dotted #000000;
+}
+.dotted-table th {
+border: 1px dotted #000000;
+}
+.noRecordsFound{
+    text-align: center;
+    padding-top: 30px;
+    font-size: 22px;
+    font-style: italic;
+    font-family: "lato", sans-serif;
+    font-weight: 400;
+}
