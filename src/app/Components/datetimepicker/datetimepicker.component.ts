@@ -45,7 +45,7 @@ export class DatetimepickerComponent implements OnInit{
   date;
 
   constructor() {
-    this.date = new FormControl(moment());
+    this.date = new FormControl();
   }
 
   ngOnInit(): void {
