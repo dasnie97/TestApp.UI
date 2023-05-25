@@ -28,8 +28,8 @@ export class TestReportListComponent implements OnInit {
   result:string = "All results";
   DUT:string = "";
   failure:string = "";
-  fromDateTime:moment.Moment = moment("20221110", "YYYYMMDD");
-  toDateTime:moment.Moment = moment();
+  fromDateTime:moment.Moment = moment().subtract(1, 'days');
+  toDateTime:moment.Moment = moment(null);
 
   ngOnInit(): void {
     this.logfileService.getAllWorkstations().subscribe(
@@ -46,18 +46,7 @@ export class TestReportListComponent implements OnInit {
     )
 
     this.filters[5].value = [this.fromDateTime.utcOffset(0, true).format()];
-    this.filters[6].value = [this.toDateTime.utcOffset(0, true).format()];
-    
-    this.logfileService.getFilteredTestReports(this.filters).subscribe(
-      {
-        next:(logfiles)=>{
-          this.logfiles = logfiles;
-        },
-        error:(response)=>{
-          console.log(response);
-        }
-      }
-    )
+    this.filterResults();
   }
 
   workstationFilterChange(evt:any)
@@ -159,13 +148,15 @@ export class TestReportListComponent implements OnInit {
     this.logfileService.getFilteredTestReports(this.filters).subscribe(
       {
         next:(logfiles)=>{
-          this.logfiles = logfiles;
+          this.logfiles = logfiles.sort((a, b) => a.recordCreated.valueOf() - b.recordCreated.valueOf());
         },
         error:(response)=>{
           console.log(response);
         }
       }
     )
+
+    setTimeout(this.filterResults.bind(this), 10000);
     }
 
     getTableRowColor(item: TestReport): string {
