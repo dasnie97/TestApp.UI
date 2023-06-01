@@ -42,3 +42,4 @@ testem.log
 Thumbs.db
 src/assets
 src/assets
+src/environments/environment.prod.ts
