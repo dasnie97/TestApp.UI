@@ -11,7 +11,7 @@ import {formatDate} from '@angular/common';
 })
 export class TestReportListComponent implements OnInit {
 
-  constructor(private logfileService:TestReportService) { }
+  constructor(private logfileService:TestReportService) {}
 
   logfiles: TestReport[] = [];
   workstations: any[] = [];
@@ -19,6 +19,7 @@ export class TestReportListComponent implements OnInit {
     {key:"workstation", value:[]},
     {key:"serialNumber", value:[]},
     {key:"result", value:[]},
+    {key:"firstPass", value:[]},
     {key:"dut", value:[]},
     {key:"failure", value:[]},
     {key:"dateFrom", value:[]},
@@ -26,6 +27,7 @@ export class TestReportListComponent implements OnInit {
   ];
   serialNumbers:string = "";
   result:string = "All results";
+  firstPass: string = "All runs";
   DUT:string = "";
   failure:string = "";
   fromDateTime:moment.Moment = moment().subtract(1, 'days');
@@ -45,7 +47,8 @@ export class TestReportListComponent implements OnInit {
       }
     )
 
-    this.filters[5].value = [this.fromDateTime.utcOffset(0, true).format()];
+    this.filters[6].value = [this.fromDateTime.utcOffset(0, true).format()];
+    setInterval(this.filterResults.bind(this), 10000);
     this.filterResults();
   }
 
@@ -85,6 +88,26 @@ export class TestReportListComponent implements OnInit {
         }
         else{
           filter.value = [this.result];
+        }
+      }
+    });
+    }
+
+  firstPassFilterChanged($event: Event) {
+    this.filters.forEach(filter => {
+      if (filter.key == "firstPass")
+      {
+        if (this.firstPass == "All runs")
+        {
+          filter.value = [];
+        }
+        else if (this.firstPass == "True")
+        {
+          filter.value = ['true'];
+        }
+        else if (this.firstPass == "False")
+        {
+          filter.value = ['false'];
         }
       }
     });
@@ -155,8 +178,6 @@ export class TestReportListComponent implements OnInit {
         }
       }
     )
-
-    setTimeout(this.filterResults.bind(this), 10000);
     }
 
     getTableRowColor(item: TestReport): string {

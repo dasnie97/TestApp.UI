@@ -14,6 +14,7 @@ export class AddTestReportComponent implements OnInit {
     id:0,
     workstation:"",
     serialNumber:"",
+    isFirstPass:null,
     status:"",
     fixtureSocket:"",
     failure:"",

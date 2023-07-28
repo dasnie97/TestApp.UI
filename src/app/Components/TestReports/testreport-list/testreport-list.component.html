@@ -3,7 +3,7 @@
       <thead class="table-info">
         <tr>
           <th scope="col" style="width: 2%">#</th>
-          <th scope="col" style="width: 1%">
+          <th scope="col" style="width: 10%">
             <app-drop-down [list]="workstations" (shareCheckedList)="workstationFilterChange($event)" (change)="filterResults()"></app-drop-down>
           </th>
           <th scope="col" style="width: 15%">
@@ -16,7 +16,15 @@
               <option>Failed</option>
             </select>
           </th>
-          <th scope="col" style="width: 3%">
+          <th scope="col" style="width: 5%">
+            First run?
+            <select class="form-control form-control-sm" [(ngModel)] = "firstPass" (change)="firstPassFilterChanged($event)" (change)="filterResults()">
+              <option>All runs</option>
+              <option>True</option>
+              <option>False</option>
+            </select>
+          </th>
+          <th scope="col" style="width: 3.2%">
             <input type="text" class="form-control form-control-sm" id="dutFilter" placeholder="DUT" [(ngModel)] = "DUT" (keyup)="dutFilterChanged($event)" (keyup)="filterResults()">
           </th>
           <th scope="col" style="width: 50%">
@@ -34,6 +42,7 @@
           <td>{{logfile.workstation}}</td>
           <td>{{logfile.serialNumber}}</td>
           <td>{{logfile.status}}</td>
+          <td>{{logfile.isFirstPass}}</td>
           <td>{{logfile.fixtureSocket}}</td>
           <td>{{logfile.failure}}</td>
           <td>{{logfile.testDateTimeStarted | date:'dd.MM.yyyy HH:mm'}}</td>
