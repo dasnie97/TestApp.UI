@@ -11,7 +11,7 @@ import {formatDate} from '@angular/common';
 })
 export class TestReportListComponent implements OnInit {
 
-  constructor(private logfileService:TestReportService) {}
+  constructor(private TestReportService:TestReportService) {}
 
   logfiles: TestReport[] = [];
   workstations: any[] = [];
@@ -34,7 +34,7 @@ export class TestReportListComponent implements OnInit {
   toDateTime:moment.Moment = moment(null);
 
   ngOnInit(): void {
-    this.logfileService.getAllWorkstations().subscribe(
+    this.TestReportService.getAllWorkstations().subscribe(
       {
         next:(workstations)=>
         {
@@ -168,7 +168,7 @@ export class TestReportListComponent implements OnInit {
   }
 
   filterResults() {
-    this.logfileService.getFilteredTestReports(this.filters).subscribe(
+    this.TestReportService.getFilteredTestReports(this.filters).subscribe(
       {
         next:(logfiles)=>{
           this.logfiles = logfiles.sort((a, b) => a.recordCreated.valueOf() - b.recordCreated.valueOf());
