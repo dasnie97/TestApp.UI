@@ -1,1 +1,14 @@
-<canvas id="FPYChart"></canvas>
+<div class="chart">
+    <canvas id="FPYChart"></canvas>
+    <div class="row mt-4">
+        <div class="col border mx-5">
+            <app-drop-down [list]="workstations" (shareCheckedList)="workstationFilterChange($event)" (change)="fetchYieldPoints()"></app-drop-down>
+        </div>
+        <div class="col border mx-5">
+            <app-datetimepicker placeholder="From" [initialValue]="fromDateTime" (dateValue)="fromDateTimeChange($event)" (dateValue)="fetchYieldPoints()"></app-datetimepicker>
+        </div>
+        <div class="col border mx-5">
+            <app-datetimepicker placeholder="To" [initialValue]="toDateTime" (dateValue)="toDateTimeChange($event)" (dateValue)="fetchYieldPoints()"></app-datetimepicker>
+        </div>
+    </div>
+</div>
