@@ -2,6 +2,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "useUnknownInCatchVariables": false,
     "baseUrl": "./",
     "paths": {
       "tslib" : ["node_modules/tslib/tslib.d.ts"]
