@@ -65,9 +65,17 @@ export class TestReportService {
     });
     return this.http.get<TestReport[]>(this.baseApiUrl + '/api/TestReport', {params: options});
   }
-  getYieldPoints():Observable<{[workstation:string]:YieldPoint[]}>
+  getYieldPoints(filters:{key:string, value:string[]}[]):Observable<{[workstation:string]:YieldPoint[]}>
   {
-    var temp = this.http.get<{[workstation:string]:YieldPoint[]}>(this.baseApiUrl + '/api/TestReport/yield');
+    var options = new HttpParams();
+    filters.forEach(filter => {
+      if (filter.value) {
+        filter.value.forEach(filterValue => {
+          options = options.append(filter.key, filterValue);
+        })
+      }
+    });
+    var temp = this.http.get<{[workstation:string]:YieldPoint[]}>(this.baseApiUrl + '/api/TestReport/yield', {params: options});
     return temp;
   }
 }
