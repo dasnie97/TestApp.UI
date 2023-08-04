@@ -9,7 +9,7 @@ import { Input, Output, EventEmitter } from '@angular/core';
 
 const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {
   parse: {
-    dateInput: 'l, LTS'
+    dateInput: 'DD.MM.YYYY HH:mm'
   },
   display: {
     dateInput: 'DD.MM.YYYY HH:mm',
