@@ -15,6 +15,7 @@ export class EditTestReportComponent implements OnInit {
     workstation:"",
     serialNumber:"",
     isFirstPass:null,
+    isFalseCall:null,
     status:"",
     fixtureSocket:"",
     failure:"",
