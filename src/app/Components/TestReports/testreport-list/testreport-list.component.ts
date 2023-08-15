@@ -20,6 +20,7 @@ export class TestReportListComponent implements OnInit {
     {key:"serialNumber", value:[]},
     {key:"result", value:[]},
     {key:"firstPass", value:[]},
+    {key:"falseCall", value:[]},
     {key:"dut", value:[]},
     {key:"failure", value:[]},
     {key:"dateFrom", value:[]},
@@ -28,6 +29,7 @@ export class TestReportListComponent implements OnInit {
   serialNumbers:string = "";
   result:string = "All results";
   firstPass: string = "All runs";
+  falseCall: string = "All";
   DUT:string = "";
   failure:string = "";
   fromDateTime:moment.Moment = moment().subtract(1, 'days');
@@ -47,7 +49,7 @@ export class TestReportListComponent implements OnInit {
       }
     )
 
-    this.filters[6].value = [this.fromDateTime.utcOffset(0, true).format()];
+    this.filters[7].value = [this.fromDateTime.utcOffset(0, true).format()];
     setInterval(this.filterResults.bind(this), 10000);
     this.filterResults();
   }
@@ -112,6 +114,26 @@ export class TestReportListComponent implements OnInit {
       }
     });
     }
+
+    falseCallFilterChanged($event: Event) {
+      this.filters.forEach(filter => {
+        if (filter.key == "falseCall")
+        {
+          if (this.falseCall == "All")
+          {
+            filter.value = [];
+          }
+          else if (this.falseCall == "True")
+          {
+            filter.value = ['true'];
+          }
+          else if (this.falseCall == "False")
+          {
+            filter.value = ['false'];
+          }
+        }
+      });
+      }
 
   dutFilterChanged($event: Event) {
     this.filters.forEach(filter => {

@@ -24,6 +24,13 @@
               <option>False</option>
             </select>
           </th>
+          <th scope="col" style="width: 5%">
+            False call?
+            <select class="form-control form-control-sm" [(ngModel)] = "falseCall" (change)="falseCallFilterChanged($event)" (change)="filterResults()">
+              <option>All</option>
+              <option>True</option>
+            </select>
+          </th>
           <th scope="col" style="width: 3.2%">
             <input type="text" class="form-control form-control-sm" id="dutFilter" placeholder="DUT" [(ngModel)] = "DUT" (keyup)="dutFilterChanged($event)" (keyup)="filterResults()">
           </th>
@@ -43,6 +50,7 @@
           <td>{{logfile.serialNumber}}</td>
           <td>{{logfile.status}}</td>
           <td>{{logfile.isFirstPass}}</td>
+          <td>{{logfile.isFalseCall}}</td>
           <td>{{logfile.fixtureSocket}}</td>
           <td>{{logfile.failure}}</td>
           <td>{{logfile.testDateTimeStarted | date:'dd.MM.yyyy HH:mm'}}</td>
