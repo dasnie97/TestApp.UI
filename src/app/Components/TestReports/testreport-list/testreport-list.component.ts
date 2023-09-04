@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { TestReport } from 'src/app/Models/testreport.model';
 import { TestReportService } from 'src/app/Services/testreport.service';
 import * as moment from 'moment';
-import {formatDate} from '@angular/common';
 
 @Component({
   selector: 'app-testreport-list',
