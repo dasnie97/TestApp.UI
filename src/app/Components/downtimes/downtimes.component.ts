@@ -33,7 +33,7 @@ export class DowntimesComponent implements OnInit {
   technicians:string = "";
   testers:string = "";
   operators:string = "";
-  timeStartedFrom:moment.Moment = moment().subtract(1, 'days');
+  timeStartedFrom:moment.Moment = moment().subtract(100, 'days');
   timeFinishedTo:moment.Moment = moment(null);
 
   ngOnInit(): void {
@@ -46,7 +46,6 @@ export class DowntimesComponent implements OnInit {
       {
         next:(downtimeReports)=>
         {
-          console.log(this.filters);
           this.downtimeReports = downtimeReports;
           this.sortedReports = this.downtimeReports.slice();
         },
