@@ -6,6 +6,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatSortModule } from '@angular/material/sort'
+
 import { MatSelectModule } from '@angular/material/select';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -23,6 +25,9 @@ import { ChartComponent } from './Components/chart/chart.component';
 import { DatetimepickerComponent } from './Components/datetimepicker/datetimepicker.component';
 import { NgxMatMomentModule } from '@angular-material-components/moment-adapter';
 import { DropDownComponent } from './Components/drop-down/drop-down.component';
+import { NavbarComponent } from './Components/navbar/navbar.component';
+import { DowntimesComponent } from './Components/downtimes/downtimes.component';
+import { HomeComponent } from './Components/home/home.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +40,9 @@ import { DropDownComponent } from './Components/drop-down/drop-down.component';
     ChartComponent,
     DatetimepickerComponent,
     DropDownComponent,
+    NavbarComponent,
+    HomeComponent,
+    DowntimesComponent
   ],
   imports: [
     NgxMatMomentModule,
@@ -53,6 +61,7 @@ import { DropDownComponent } from './Components/drop-down/drop-down.component';
     MatButtonModule,
     NgxMatDatetimePickerModule,
     NgxMatNativeDateModule,
+    MatSortModule
   ],
   providers: [
   ],

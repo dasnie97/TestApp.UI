@@ -1,0 +1,45 @@
+<div class="p-4">
+  <table class="table table-bordered table-hover table-secondary" matSort (matSortChange)="sortData($event)">
+    <thead class="table-info">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col" style="width: 20%;">
+          <input type="text" class="form-control form-control-sm" placeholder="Problem" [(ngModel)]="problemDescriptions" (keyup)="problemDescriptionFilterChange($event)" (keyup)="filterResults()">
+        </th>
+        <th scope="col" style="width: 20%;">
+          <input type="text" class="form-control form-control-sm" placeholder="Akcja" [(ngModel)]="actionsTaken" (keyup)="actionTakenFilterChange($event)" (keyup)="filterResults()">
+        </th>
+        <th scope="col" style="width: 10%;">
+          <input type="text" class="form-control form-control-sm" placeholder="Wykonał" [(ngModel)]="technicians" (keyup)="technicianFilterChange($event)" (keyup)="filterResults()">
+        </th>
+        <th scope="col" style="width: 15%;">
+          <input type="text" class="form-control form-control-sm" placeholder="Tester" [(ngModel)]="testers" (keyup)="testerFilterChange($event)" (keyup)="filterResults()">
+        </th>
+        <th scope="col" style="width: 10%;">
+          <input type="text" class="form-control form-control-sm" placeholder="Operator" [(ngModel)]="operators" (keyup)="operatorFilterChange($event)" (keyup)="filterResults()">
+        </th>
+        <th scope="col">
+          <app-datetimepicker placeholder="Start od" [initialValue]="timeStartedFrom" (dateValue)="timeStartedFromFilterChange($event)" (dateValue)="filterResults()"></app-datetimepicker>
+        </th>
+        <th scope="col">
+          <app-datetimepicker placeholder="Koniec do" [initialValue]="timeFinishedTo" (dateValue)="timeFinishedToFilterChange($event)" (dateValue)="filterResults()"></app-datetimepicker>
+        </th>
+        <th scope="col" mat-sort-header="time">Czas</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="downtimeReports && downtimeReports.length>0">
+      <tr *ngFor="let downtimeReport of sortedReports; let i=index">
+        <td>{{i+1}}</td>
+        <td>{{downtimeReport.problemDescription}}</td>
+        <td>{{downtimeReport.actionTaken}}</td>
+        <td>{{downtimeReport.technician}}</td>
+        <td>{{downtimeReport.workstation}}</td>
+        <td>{{downtimeReport.operator}}</td>
+        <td>{{downtimeReport.timeStarted | date:'dd.MM.yyyy HH:mm'}}</td>
+        <td>{{downtimeReport.timeFinished | date:'dd.MM.yyyy HH:mm'}}</td>
+        <td>{{downtimeReport.totalDowntime}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <p *ngIf="!downtimeReports || downtimeReports.length <=0" class="noRecordsFound">Brak wpisów</p>
+</div>
