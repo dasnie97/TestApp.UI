@@ -6,11 +6,13 @@ import { HomeComponent } from './Components/home/home.component';
 const routes: Routes = [
   {
     path: '',
-    component:HomeComponent
+    component:HomeComponent,
+    data:{animation: 'isLeft'}
   },
   {
     path: 'downtimes',
-    component:DowntimesComponent
+    component:DowntimesComponent,
+    data:{animation: 'isRight'}
   }
 ];
 

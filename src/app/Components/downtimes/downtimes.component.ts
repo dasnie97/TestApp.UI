@@ -3,12 +3,17 @@ import {Sort} from '@angular/material/sort';
 import * as moment from 'moment';
 import { DowntimeReport } from 'src/app/Models/downtimereport.model';
 import { DowntimereportService } from 'src/app/Services/downtimereport.service';
+import {listAnimation} from 'src/app/Models/animations';
 
 @Component({
   selector: 'app-downtimes',
   templateUrl: './downtimes.component.html',
   styleUrls: ['./downtimes.component.css'],
-})
+  animations: [
+    listAnimation
+]})
+
+
 export class DowntimesComponent implements OnInit {
 
   constructor(private DowntimeReportService:DowntimereportService) {
@@ -42,6 +47,7 @@ export class DowntimesComponent implements OnInit {
   }
 
   filterResults(){
+    this.sortedReports = [];
     this.DowntimeReportService.getFilteredDowntimeReports(this.filters).subscribe(
       {
         next:(downtimeReports)=>

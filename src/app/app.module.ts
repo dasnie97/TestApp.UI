@@ -61,7 +61,8 @@ import { HomeComponent } from './Components/home/home.component';
     MatButtonModule,
     NgxMatDatetimePickerModule,
     NgxMatNativeDateModule,
-    MatSortModule
+    MatSortModule,
+    BrowserAnimationsModule
   ],
   providers: [
   ],
