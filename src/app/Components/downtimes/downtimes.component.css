@@ -5,18 +5,15 @@
     font-style: italic;
     font-family: "lato", sans-serif;
     font-weight: 400;
-    color: azure;
 }
 
 .myTable{
     border-radius: 10px;
     overflow: hidden;
-    border: 4px solid black;
 }
 
 .background{
-    background-image: url("../../../assets/Img/background.jpg");
-    background-color: #cccccc;
+    background-image: url("../../../assets/Img/background4.jpg");
     background-size: cover;
     height: 100%;
     margin: 0 auto;
@@ -27,16 +24,33 @@
     position: relative;
 }
 
-.myTableHead{
-    font-weight: bold;
-    background-color: #648adb;
+
+tbody tr:nth-child(odd) {
+    background-color: #ffffff00;
+  }
+tbody tr:nth-child(even) {
+background-color: #ffffff67;
 }
 
-.myTableBody{
-    color: black;
+.myTableHead{
+    font-weight: bold;
+    border-bottom: 2px solid whitesmoke;
 }
 
 .myTableRow{
-    background: rgba(230, 203, 203, 0.979);
-    font-family: "montserrat", sans-serif;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    border-top: none;
+    border-bottom: none;
+    color: rgb(63, 59, 59);
+}
+
+table, th, td {
+    border-collapse: collapse;
+}
+td{
+    border:1px solid black;
+    border-top: none;
+    border-bottom: none;
+    border-right: none;
+    border-left: none;
 }

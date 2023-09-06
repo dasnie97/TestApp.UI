@@ -1,6 +1,6 @@
 <div class="background">
   <div>
-    <table class="table table-bordered myTable" matSort (matSortChange)="sortData($event)">
+    <table class="table myTable" matSort (matSortChange)="sortData($event)">
       <thead class="myTableHead">
         <tr>
           <th scope="col" style="width: 2%;">#</th>
@@ -28,7 +28,7 @@
           <th scope="col" mat-sort-header="time">Czas</th>
         </tr>
       </thead>
-      <tbody *ngIf="downtimeReports && downtimeReports.length>0" class="myTableBody">
+      <tbody *ngIf="downtimeReports && downtimeReports.length>0" [@listAnimation]="sortedReports.length">
         <tr *ngFor="let downtimeReport of sortedReports; let i=index" class="myTableRow">
           <td>{{i+1}}</td>
           <td>{{downtimeReport.problemDescription}}</td>
