@@ -1,5 +1,8 @@
 <div class="background">
-  <div>
+  <div id="topBar">
+    <button mat-raised-button (click)="openAddEditDowntimeForm()">Dodaj</button>
+  </div>
+  <div id="table">
     <table class="table myTable" matSort (matSortChange)="sortData($event)">
       <thead class="myTableHead">
         <tr>

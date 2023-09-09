@@ -4,6 +4,8 @@ import * as moment from 'moment';
 import { DowntimeReport } from 'src/app/Models/downtimereport.model';
 import { DowntimereportService } from 'src/app/Services/downtimereport.service';
 import {listAnimation} from 'src/app/Models/animations';
+import { MatDialog } from '@angular/material/dialog';
+import { AddDowntimeComponent } from '../add-downtime/add-downtime.component';
 
 @Component({
   selector: 'app-downtimes',
@@ -16,7 +18,7 @@ import {listAnimation} from 'src/app/Models/animations';
 
 export class DowntimesComponent implements OnInit {
 
-  constructor(private DowntimeReportService:DowntimereportService) {
+  constructor(private DowntimeReportService:DowntimereportService, private _dialog: MatDialog) {
   }
 
   downtimeReports: DowntimeReport[] = [];
@@ -181,6 +183,10 @@ export class DowntimesComponent implements OnInit {
             return 0;
         }
       });
+    }
+
+    openAddEditDowntimeForm(){
+      this._dialog.open(AddDowntimeComponent)
     }
 }
 

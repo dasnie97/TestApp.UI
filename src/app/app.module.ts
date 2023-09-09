@@ -1,6 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -28,6 +28,12 @@ import { DropDownComponent } from './Components/drop-down/drop-down.component';
 import { NavbarComponent } from './Components/navbar/navbar.component';
 import { DowntimesComponent } from './Components/downtimes/downtimes.component';
 import { HomeComponent } from './Components/home/home.component';
+import { AddDowntimeComponent } from './Components/add-downtime/add-downtime.component';
+import {MAT_AUTOCOMPLETE_DEFAULT_OPTIONS, MatAutocompleteModule} from '@angular/material/autocomplete';
+
+import {Component, ElementRef, ViewChild} from '@angular/core';
+import {NgFor, AsyncPipe} from '@angular/common';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -42,7 +48,8 @@ import { HomeComponent } from './Components/home/home.component';
     DropDownComponent,
     NavbarComponent,
     HomeComponent,
-    DowntimesComponent
+    DowntimesComponent,
+    AddDowntimeComponent
   ],
   imports: [
     NgxMatMomentModule,
@@ -62,9 +69,13 @@ import { HomeComponent } from './Components/home/home.component';
     NgxMatDatetimePickerModule,
     NgxMatNativeDateModule,
     MatSortModule,
-    BrowserAnimationsModule
+    MatAutocompleteModule,
+    MatFormFieldModule,
+    NgFor,
+    AsyncPipe,
   ],
   providers: [
+    {provide: MAT_AUTOCOMPLETE_DEFAULT_OPTIONS, useValue: {autoActiveFirstOption: false}}
   ],
   bootstrap: [AppComponent]
 })
