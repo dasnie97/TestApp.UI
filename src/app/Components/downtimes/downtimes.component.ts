@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {Sort} from '@angular/material/sort';
-import * as moment from 'moment';
 import { DowntimeReport } from 'src/app/Models/downtimereport.model';
 import { DowntimereportService } from 'src/app/Services/downtimereport.service';
 import {listAnimation} from 'src/app/Models/animations';
 import { MatDialog } from '@angular/material/dialog';
 import { AddDowntimeComponent } from '../add-downtime/add-downtime.component';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-downtimes',
@@ -40,11 +40,11 @@ export class DowntimesComponent implements OnInit {
   technicians:string = "";
   testers:string = "";
   operators:string = "";
-  timeStartedFrom:moment.Moment = moment().subtract(100, 'days');
-  timeFinishedTo:moment.Moment = moment(null);
+  timeStarted:moment.Moment = moment().subtract(1, "day");
+  timeFinished:moment.Moment = moment(null);
 
   ngOnInit(): void {
-    this.filters[5].value = [this.timeStartedFrom.utcOffset(0, true).format()];
+    this.filters[5].value = [this.timeStarted.utcOffset(0, true).format()];
     this.filterResults();
   }
 
@@ -145,24 +145,24 @@ export class DowntimesComponent implements OnInit {
     });
     }
 
-  timeStartedFromFilterChange(dateTime:moment.Moment)
+  timeStartedFilterChange(event:moment.Moment)
     {
-      this.timeStartedFrom = dateTime;
+      this.timeStarted = event;
       this.filters.forEach(filter => {
         if (filter.key == "dateFrom")
         {
-          filter.value = [dateTime.utcOffset(0, true).format()];
+          filter.value = [this.timeStarted.utcOffset(0, true).format()];
         }
       });
     }
 
-  timeFinishedToFilterChange(dateTime:moment.Moment)
+  timeFinishedFilterChange(event:moment.Moment)
     {
-      this.timeFinishedTo = dateTime;
+      this.timeFinished = event;
       this.filters.forEach(filter => {
         if (filter.key == "dateTo")
         {
-          filter.value = [dateTime.utcOffset(0, true).format()];
+          filter.value = [this.timeFinished.utcOffset(0, true).format()];
         }
       });
     }
@@ -186,7 +186,15 @@ export class DowntimesComponent implements OnInit {
     }
 
     openAddEditDowntimeForm(){
-      this._dialog.open(AddDowntimeComponent)
+      const dialogRef = this._dialog.open(AddDowntimeComponent);
+
+      dialogRef.afterClosed().subscribe({
+        next: (val) => {
+          if (val) {
+            this.filterResults();
+          }
+        }
+      })
     }
 }
 

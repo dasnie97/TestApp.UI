@@ -7,32 +7,32 @@
     font-weight: 400;
 }
 
-.myTable{
+.background{
+    background-attachment: fixed;
+    background-size: cover;
+    height: auto;
+    min-height: 100%;
+    background-image: url("../../../assets/Img/background4.jpg");
+}
+
+.table{
+    margin-top: 3%;
+    margin: 0 auto;
+    padding: 5%;
+    padding-top: 1%;
     border-radius: 10px;
     overflow: hidden;
 }
 
-.background{
-    background-image: url("../../../assets/Img/background4.jpg");
-    background-size: cover;
-    height: 100%;
-    margin: 0 auto;
+.downtimeTable{
+    padding: 5%;
     padding-top: 1%;
-    padding-left: 5%;
-    padding-right: 5%;
-    background-attachment: fixed;
-    position: relative;
 }
 
-#table{
-    margin-top: 3%;
-}
-
-#topBar{
-    float: right;
+.button{
     opacity: 0.9;
+    float: right;
 }
-
 
 tbody tr:nth-child(odd) {
     background-color: #ffffff00;
@@ -42,24 +42,22 @@ background-color: #ffffff67;
 }
 
 .myTableHead{
-    font-weight: bold;
     border-bottom: 2px solid whitesmoke;
 }
 
 .myTableRow{
     font-family:Verdana, Geneva, Tahoma, sans-serif;
-    border-top: none;
-    border-bottom: none;
     color: rgb(63, 59, 59);
+    border: none;
 }
 
-table, th, td {
-    border-collapse: collapse;
-}
 td{
-    border:1px solid black;
     border-top: none;
     border-bottom: none;
     border-right: none;
     border-left: none;
 }
+
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+    background-color: rgba(253, 249, 42, 0.164);
+  }

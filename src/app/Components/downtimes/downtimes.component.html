@@ -1,9 +1,7 @@
 <div class="background">
-  <div id="topBar">
-    <button mat-raised-button (click)="openAddEditDowntimeForm()">Dodaj</button>
-  </div>
-  <div id="table">
-    <table class="table myTable" matSort (matSortChange)="sortData($event)">
+  <div class="downtimeTable">
+    <button class="button" mat-raised-button (click)="openAddEditDowntimeForm()">New</button>
+    <table class="table table-hover" matSort (matSortChange)="sortData($event)">
       <thead class="myTableHead">
         <tr>
           <th scope="col" style="width: 2%;">#</th>
@@ -11,10 +9,10 @@
             <input type="text" class="form-control form-control-sm" placeholder="Problem" [(ngModel)]="problemDescriptions" (keyup)="problemDescriptionFilterChange($event)" (keyup)="filterResults()">
           </th>
           <th scope="col" style="width: 20%;">
-            <input type="text" class="form-control form-control-sm" placeholder="Akcja" [(ngModel)]="actionsTaken" (keyup)="actionTakenFilterChange($event)" (keyup)="filterResults()">
+            <input type="text" class="form-control form-control-sm" placeholder="Action taken" [(ngModel)]="actionsTaken" (keyup)="actionTakenFilterChange($event)" (keyup)="filterResults()">
           </th>
           <th scope="col" style="width: 10%;">
-            <input type="text" class="form-control form-control-sm" placeholder="Wykonał" [(ngModel)]="technicians" (keyup)="technicianFilterChange($event)" (keyup)="filterResults()">
+            <input type="text" class="form-control form-control-sm" placeholder="Done by" [(ngModel)]="technicians" (keyup)="technicianFilterChange($event)" (keyup)="filterResults()">
           </th>
           <th scope="col" style="width: 15%;">
             <input type="text" class="form-control form-control-sm" placeholder="Tester" [(ngModel)]="testers" (keyup)="testerFilterChange($event)" (keyup)="filterResults()">
@@ -23,12 +21,12 @@
             <input type="text" class="form-control form-control-sm" placeholder="Operator" [(ngModel)]="operators" (keyup)="operatorFilterChange($event)" (keyup)="filterResults()">
           </th>
           <th scope="col">
-            <app-datetimepicker placeholder="Start od" [initialValue]="timeStartedFrom" (dateValue)="timeStartedFromFilterChange($event)" (dateValue)="filterResults()"></app-datetimepicker>
+            <app-datetimepicker placeholder="Start from" [initialValue]="timeStarted" (dateValue)="timeStartedFilterChange($event)" (dateValue)="filterResults()"></app-datetimepicker>
           </th>
           <th scope="col">
-            <app-datetimepicker placeholder="Koniec do" [initialValue]="timeFinishedTo" (dateValue)="timeFinishedToFilterChange($event)" (dateValue)="filterResults()"></app-datetimepicker>
+            <app-datetimepicker placeholder="Finish to" [initialValue]="timeFinished" (dateValue)="timeFinishedFilterChange($event)" (dateValue)="filterResults()"></app-datetimepicker>
           </th>
-          <th scope="col" mat-sort-header="time">Czas</th>
+          <th scope="col" mat-sort-header="time">Time</th>
         </tr>
       </thead>
       <tbody *ngIf="downtimeReports && downtimeReports.length>0" [@listAnimation]="sortedReports.length">
@@ -45,6 +43,6 @@
         </tr>
       </tbody>
     </table>
-    <p *ngIf="!downtimeReports || downtimeReports.length <=0" class="noRecordsFound">Brak wpisów</p>
+    <p *ngIf="!downtimeReports || downtimeReports.length <=0" class="noRecordsFound">No records found</p>
   </div>
 </div>
