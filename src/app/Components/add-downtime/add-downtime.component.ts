@@ -1,9 +1,10 @@
-import { ConsoleLogger } from '@angular/compiler-cli';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, inject} from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 import * as moment from 'moment';
 import { CreateDowntimeReport } from 'src/app/Models/createdowntimereport.model';
 import { DowntimereportService } from 'src/app/Services/downtimereport.service';
+import { TestReportService } from 'src/app/Services/testreport.service';
 
 @Component({
   selector: 'app-add-downtime',
@@ -12,15 +13,20 @@ import { DowntimereportService } from 'src/app/Services/downtimereport.service';
 })
 export class AddDowntimeComponent implements OnInit {
 
-  myControl = new FormControl('');
-  options: string[] = ['One', 'Two', 'Three', 'Four', 'Five'];
+  workstation = new FormControl('');
+  workstations: {name:string, checked:boolean}[];
   filteredOptions: string[];
   @ViewChild('input') input: ElementRef<HTMLInputElement>;
   form: FormGroup;
   timeStarted:moment.Moment = moment();
   timeFinished:moment.Moment = moment();
 
-  constructor(private _fb: FormBuilder, private _downtimeReportService:DowntimereportService) {
+  constructor(
+    private _fb: FormBuilder, 
+    private _downtimeReportService:DowntimereportService, 
+    private TestReportService:TestReportService, 
+    private _dialogRef: MatDialogRef<AddDowntimeComponent>) 
+    {
     this.form = this._fb.group({
       problemDescription:'',
       actionTaken:'',
@@ -31,17 +37,28 @@ export class AddDowntimeComponent implements OnInit {
       timeFinished:'',
       totalDowntime:''
     })
-
-    this.filteredOptions = this.options.slice();
    }
 
   ngOnInit(): void {
+    this.TestReportService.getAllWorkstations().subscribe(
+      {
+        next:(workstations)=>
+        {
+          this.workstations = workstations;
+        },
+        error:(response)=>
+        {
+          console.log(response);
+        }
+      }
+    )
   }
 
   filter(): void {
     const filterValue = this.input.nativeElement.value.toLowerCase();
-    this.filteredOptions = this.options.filter(o => o.toLowerCase().includes(filterValue));
+    this.filteredOptions = this.workstations.filter(o => o.name.toLowerCase().includes(filterValue)).map(o => o.name);
   }
+
   onFormSubmit()
   {
     if(this.form.valid)
@@ -55,18 +72,17 @@ export class AddDowntimeComponent implements OnInit {
       var totalDowntime:moment.Moment = moment(0).subtract(1, 'hour').add(downtimeReport.totalDowntime, 'minutes');
 
       downtimeReport.totalDowntime = totalDowntime.utcOffset(0, true).format('HH:mm:ss');
-      console.log(downtimeReport);
+      downtimeReport.workstation = this.workstation.value!;
       
-
-      /*this._downtimeReportService.postDowntimeReport(downtimeReport).subscribe({
+      this._downtimeReportService.postDowntimeReport(downtimeReport).subscribe({
         next:(val:any) => {
-          console.log(val);
-          alert("Dodano raport problemu!");
+          alert("Downtime report created succesfully!");
+          this._dialogRef.close(true);
         },
         error:(err:any) => {
           console.log(err);
         }
-      })*/
+      })
     }
   }
 

@@ -1,24 +1,24 @@
 <div mat-dialog-title>
-    <h1>Problem produkcyjny</h1>
+    <h1>Production downtime</h1>
 </div>
 <form [formGroup]="form" (ngSubmit)="onFormSubmit()">
     <div mat-dialog-content class="container">
-        <div class="row">
+        <div class="row mb-3">
             <mat-form-field appearance="outline">
                 <mat-label>Problem</mat-label>
                 <input matInput formControlName="problemDescription">
             </mat-form-field>
         </div>
-        <div class="row">
+        <div class="row mb-3">
             <mat-form-field appearance="outline">
-                <mat-label>Akcja</mat-label>
+                <mat-label>Action taken</mat-label>
                 <input matInput formControlName="actionTaken">
             </mat-form-field>
         </div>
-        <div class="row">
+        <div class="row mb-3">
             <div class="col">
                 <mat-form-field appearance="outline">
-                    <mat-label>Wykonał</mat-label>
+                    <mat-label>Done by</mat-label>
                     <input matInput formControlName="technician">
                 </mat-form-field>
             </div>
@@ -30,11 +30,11 @@
                             placeholder="Pick one"
                             matInput
                             formControlName="workstation"
-                            [formControl]="myControl"
+                            [formControl]="workstation"
                             [matAutocomplete]="auto"
                             (input)="filter()"
                             (focus)="filter()">
-                    <mat-autocomplete requireSelection #auto="matAutocomplete">
+                    <mat-autocomplete requireSelection autoActiveFirstOption #auto="matAutocomplete">
                         <mat-option *ngFor="let option of filteredOptions" [value]="option">
                             {{option}}
                         </mat-option>
@@ -50,21 +50,23 @@
         </div>
         <div class="row">
             <div class="col">
-                <app-datetimepicker placeholder="Start od" (dateValue)="timeStartedChange($event)"></app-datetimepicker>
+                <div class="caption">Start</div>
+                <app-datetimepicker style="zoom: 1.32;" placeholder="Start" [initialValue]="timeStarted" (dateValue)="timeStartedChange($event)"></app-datetimepicker>
             </div>
             <div class="col">
-                <app-datetimepicker placeholder="Koniec do" (dateValue)="timeFinishedChange($event)"></app-datetimepicker>
+                <div class="caption">Finish</div>
+                <app-datetimepicker style="zoom: 1.32;" placeholder="Finish" [initialValue]="timeFinished" (dateValue)="timeFinishedChange($event)"></app-datetimepicker>
             </div>
-            <div class="col">
+            <div class="col mt-3">
                 <mat-form-field appearance="outline">
-                    <mat-label>Czas</mat-label>
+                    <mat-label>Time</mat-label>
                     <input matInput placeholder="[min]" type="number" formControlName="totalDowntime">
                 </mat-form-field>
             </div>
         </div>
     </div>
     <div mat-dialog-actions class="action">
-        <button mat-raised-button class="mx-2">Cancel</button>
-        <button mat-raised-button class="mx-2" color="primary" type="submit">Save</button>
+        <button mat-raised-button class="mx-2 mb-3" [mat-dialog-close]="false">Cancel</button>
+        <button mat-raised-button class="mx-2 mb-3" color="primary" type="submit">Save</button>
     </div>
 </form>
