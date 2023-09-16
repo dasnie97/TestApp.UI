@@ -31,7 +31,7 @@ export class TestReportListComponent implements OnInit {
   falseCall: string = "All";
   DUT:string = "";
   failure:string = "";
-  fromDateTime:moment.Moment = moment().subtract(1, 'days');
+  fromDateTime:moment.Moment = moment(null);
   toDateTime:moment.Moment = moment(null);
 
   ngOnInit(): void {
@@ -48,7 +48,6 @@ export class TestReportListComponent implements OnInit {
       }
     )
 
-    this.filters[7].value = [this.fromDateTime.utcOffset(0, true).format()];
     setInterval(this.filterResults.bind(this), 10000);
     this.filterResults();
   }
