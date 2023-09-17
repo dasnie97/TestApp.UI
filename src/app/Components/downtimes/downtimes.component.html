@@ -21,10 +21,10 @@
             <input type="text" class="form-control form-control-sm" placeholder="Operator" [(ngModel)]="operators" (keyup)="operatorFilterChange($event)" (keyup)="filterResults()">
           </th>
           <th scope="col">
-            <app-datetimepicker placeholder="Start from" [initialValue]="timeStarted" (dateValue)="timeStartedFilterChange($event)" (dateValue)="filterResults()"></app-datetimepicker>
+            <app-datetimepicker placeholder="Start from" [initialValue]="timeStarted" (dateValue)="timeStartedFilterChange($event)" (dateValue)="filterResults()" [isRequired]="false"></app-datetimepicker>
           </th>
           <th scope="col">
-            <app-datetimepicker placeholder="Finish to" [initialValue]="timeFinished" (dateValue)="timeFinishedFilterChange($event)" (dateValue)="filterResults()"></app-datetimepicker>
+            <app-datetimepicker placeholder="Finish to" [initialValue]="timeFinished" (dateValue)="timeFinishedFilterChange($event)" (dateValue)="filterResults()" [isRequired]="false"></app-datetimepicker>
           </th>
           <th scope="col" mat-sort-header="time">Time</th>
         </tr>

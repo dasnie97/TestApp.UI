@@ -40,6 +40,8 @@ export class DatetimepickerComponent implements OnInit{
   placeholder!:string;
   @Input()
   initialValue!:moment.Moment;
+  @Input() 
+  isRequired: boolean = false;
 
   @Output() dateValue = new EventEmitter<moment.Moment>();
 

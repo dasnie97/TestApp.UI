@@ -38,8 +38,8 @@
             <input type="text" class="form-control form-control-sm" id="failureFilter" placeholder="Failure" [(ngModel)] = "failure" (keyup)="failureFilterChanged($event)" (keyup)="filterResults()">
           </th>
           <th scope="col" style="width: 5%">
-            <app-datetimepicker placeholder="From" [initialValue]="fromDateTime" (dateValue)="fromDateTimeChange($event)" (dateValue)="filterResults()"></app-datetimepicker>
-            <app-datetimepicker placeholder="To" [initialValue]="toDateTime" (dateValue)="toDateTimeChange($event)" (dateValue)="filterResults()"></app-datetimepicker>
+            <app-datetimepicker [isRequired]="false" placeholder="From" [initialValue]="fromDateTime" (dateValue)="fromDateTimeChange($event)" (dateValue)="filterResults()"></app-datetimepicker>
+            <app-datetimepicker [isRequired]="false" placeholder="To" [initialValue]="toDateTime" (dateValue)="toDateTimeChange($event)" (dateValue)="filterResults()"></app-datetimepicker>
           </th>
         </tr>
       </thead>

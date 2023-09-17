@@ -54,11 +54,11 @@
         <div class="row">
             <div class="col">
                 <div class="caption">Start</div>
-                <app-datetimepicker style="zoom: 1.32;" placeholder="Start" [initialValue]="timeStarted" (dateValue)="timeStartedChange($event)"></app-datetimepicker>
+                <app-datetimepicker style="zoom: 1.32;" [isRequired]="true" placeholder="Start" [initialValue]="timeStarted" (dateValue)="timeStartedChange($event)"></app-datetimepicker>
             </div>
             <div class="col">
                 <div class="caption">Finish</div>
-                <app-datetimepicker style="zoom: 1.32;" placeholder="Finish" [initialValue]="timeFinished" (dateValue)="timeFinishedChange($event)"></app-datetimepicker>
+                <app-datetimepicker style="zoom: 1.32;" [isRequired]="true" placeholder="Finish" [initialValue]="timeFinished" (dateValue)="timeFinishedChange($event)"></app-datetimepicker>
             </div>
             <div class="col mt-3">
                 <mat-form-field appearance="outline">
