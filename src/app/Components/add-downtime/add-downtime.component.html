@@ -6,20 +6,23 @@
         <div class="row mb-3">
             <mat-form-field appearance="outline">
                 <mat-label>Problem</mat-label>
-                <input matInput formControlName="problemDescription">
+                <input matInput formControlName="problemDescription" required="true">
+                <mat-error>This field is required!</mat-error>
             </mat-form-field>
         </div>
         <div class="row mb-3">
             <mat-form-field appearance="outline">
                 <mat-label>Action taken</mat-label>
-                <input matInput formControlName="actionTaken">
+                <input matInput formControlName="actionTaken" required="true">
+                <mat-error>This field is required!</mat-error>
             </mat-form-field>
         </div>
         <div class="row mb-3">
             <div class="col">
                 <mat-form-field appearance="outline">
                     <mat-label>Done by</mat-label>
-                    <input matInput formControlName="technician">
+                    <input matInput formControlName="technician" required="true">
+                    <mat-error>This field is required!</mat-error>
                 </mat-form-field>
             </div>
             <div class="col">
@@ -60,7 +63,8 @@
             <div class="col mt-3">
                 <mat-form-field appearance="outline">
                     <mat-label>Time</mat-label>
-                    <input matInput placeholder="[min]" type="number" formControlName="totalDowntime">
+                    <input matInput placeholder="[min]" type="number" formControlName="totalDowntime" required>
+                    <mat-error>This field is required!</mat-error>
                 </mat-form-field>
             </div>
         </div>
