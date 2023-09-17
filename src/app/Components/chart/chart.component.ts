@@ -3,6 +3,7 @@ import { Chart, registerables, ChartConfiguration, ChartTypeRegistry, TooltipIte
 import { YieldPoint } from 'src/app/Models/yield-point.model';
 import { TestReportService } from 'src/app/Services/testreport.service';
 import * as moment from 'moment';
+import { WorkstationService } from 'src/app/Services/workstation.service';
 Chart.register(...registerables);
 
 @Component({
@@ -25,7 +26,7 @@ export class ChartComponent implements OnInit {
     "husqv": this.yp,
   };
 
-  constructor(private TestReportService:TestReportService) { }
+  constructor(private TestReportService:TestReportService, private WorkstationService:WorkstationService) { }
 
   workstations: any[] = [];
   filters:{key:string, value:string[]}[]=[
@@ -38,7 +39,7 @@ export class ChartComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.TestReportService.getAllWorkstations().subscribe(
+    this.WorkstationService.getWorkstations().subscribe(
       {
         next:(workstations)=>
         {
@@ -72,7 +73,14 @@ export class ChartComponent implements OnInit {
     this.filters.forEach(filter => {
       if (filter.key == "dateFrom")
       {
-        filter.value = [dateTime.utcOffset(0, true).format()];
+        if (dateTime == null)
+        {
+          filter.value = [];
+        }
+        else
+        {
+          filter.value = [dateTime.utcOffset(0, true).format()];
+        }
       }
     });
   }
@@ -83,7 +91,14 @@ export class ChartComponent implements OnInit {
     this.filters.forEach(filter => {
       if (filter.key == "dateTo")
       {
-        filter.value = [dateTime.utcOffset(0, true).format()];
+        if (dateTime == null)
+        {
+          filter.value = [];
+        }
+        else
+        {
+          filter.value = [dateTime.utcOffset(0, true).format()];
+        }
       }
     });
   }

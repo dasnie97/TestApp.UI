@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TestReport } from 'src/app/Models/testreport.model';
 import { TestReportService } from 'src/app/Services/testreport.service';
 import * as moment from 'moment';
+import { WorkstationService } from 'src/app/Services/workstation.service';
 
 @Component({
   selector: 'app-testreport-list',
@@ -10,7 +11,7 @@ import * as moment from 'moment';
 })
 export class TestReportListComponent implements OnInit {
 
-  constructor(private TestReportService:TestReportService) {}
+  constructor(private TestReportService:TestReportService, private WorkstationService:WorkstationService) {}
 
   logfiles: TestReport[] = [];
   workstations: any[] = [];
@@ -35,7 +36,7 @@ export class TestReportListComponent implements OnInit {
   toDateTime:moment.Moment = moment(null);
 
   ngOnInit(): void {
-    this.TestReportService.getAllWorkstations().subscribe(
+    this.WorkstationService.getWorkstations().subscribe(
       {
         next:(workstations)=>
         {
@@ -171,7 +172,14 @@ export class TestReportListComponent implements OnInit {
     this.filters.forEach(filter => {
       if (filter.key == "dateFrom")
       {
-        filter.value = [dateTime.utcOffset(0, true).format()];
+        if (dateTime == null)
+        {
+          filter.value = [];
+        }
+        else
+        {
+          filter.value = [dateTime.utcOffset(0, true).format()];
+        }
       }
     });
   }
@@ -182,7 +190,14 @@ export class TestReportListComponent implements OnInit {
     this.filters.forEach(filter => {
       if (filter.key == "dateTo")
       {
-        filter.value = [dateTime.utcOffset(0, true).format()];
+        if (dateTime == null)
+        {
+          filter.value = [];
+        }
+        else
+        {
+          filter.value = [dateTime.utcOffset(0, true).format()];
+        }
       }
     });
   }

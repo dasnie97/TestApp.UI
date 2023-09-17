@@ -145,24 +145,38 @@ export class DowntimesComponent implements OnInit {
     });
     }
 
-  timeStartedFilterChange(event:moment.Moment)
+  timeStartedFilterChange(dateTime:moment.Moment)
     {
-      this.timeStarted = event;
+      this.timeStarted = dateTime;
       this.filters.forEach(filter => {
         if (filter.key == "dateFrom")
         {
-          filter.value = [this.timeStarted.utcOffset(0, true).format()];
+          if (dateTime == null)
+          {
+            filter.value = [];
+          }
+          else
+          {
+            filter.value = [dateTime.utcOffset(0, true).format()];
+          }
         }
       });
     }
 
-  timeFinishedFilterChange(event:moment.Moment)
+  timeFinishedFilterChange(dateTime:moment.Moment)
     {
-      this.timeFinished = event;
+      this.timeFinished = dateTime;
       this.filters.forEach(filter => {
         if (filter.key == "dateTo")
         {
-          filter.value = [this.timeFinished.utcOffset(0, true).format()];
+          if (dateTime == null)
+          {
+            filter.value = [];
+          }
+          else
+          {
+            filter.value = [dateTime.utcOffset(0, true).format()];
+          }
         }
       });
     }

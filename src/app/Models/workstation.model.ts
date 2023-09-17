@@ -1,9 +1,7 @@
 export interface Workstation
 {
-    id:number,
     name:string,
-    customer:string,
-    positionX:string,
-    positionY:string,
+    operatorName:string,
+    processStep:string,
     state:string
 }
