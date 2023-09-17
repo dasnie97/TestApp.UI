@@ -1,10 +1,11 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild, inject} from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import * as moment from 'moment';
 import { CreateDowntimeReport } from 'src/app/Models/createdowntimereport.model';
 import { DowntimereportService } from 'src/app/Services/downtimereport.service';
-import { TestReportService } from 'src/app/Services/testreport.service';
+import { WorkstationService } from 'src/app/Services/workstation.service';
 
 @Component({
   selector: 'app-add-downtime',
@@ -14,7 +15,7 @@ import { TestReportService } from 'src/app/Services/testreport.service';
 export class AddDowntimeComponent implements OnInit {
 
   workstation = new FormControl('');
-  workstations: {name:string, checked:boolean}[];
+  workstations: any[] = [];
   filteredOptions: string[];
   @ViewChild('input') input: ElementRef<HTMLInputElement>;
   form: FormGroup;
@@ -23,8 +24,8 @@ export class AddDowntimeComponent implements OnInit {
 
   constructor(
     private _fb: FormBuilder, 
-    private _downtimeReportService:DowntimereportService, 
-    private TestReportService:TestReportService, 
+    private _downtimeReportService:DowntimereportService,
+    private WorkstationService:WorkstationService,
     private _dialogRef: MatDialogRef<AddDowntimeComponent>) 
     {
     this.form = this._fb.group({
@@ -40,7 +41,7 @@ export class AddDowntimeComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.TestReportService.getAllWorkstations().subscribe(
+    this.WorkstationService.getWorkstations().subscribe(
       {
         next:(workstations)=>
         {
@@ -61,28 +62,34 @@ export class AddDowntimeComponent implements OnInit {
 
   onFormSubmit()
   {
-    if(this.form.valid)
-    {
-      this.form.patchValue({
-        timeStarted: this.timeStarted.utcOffset(0, true).format(),
-        timeFinished: this.timeFinished.utcOffset(0, true).format()
-      });
-
-      var downtimeReport: CreateDowntimeReport = new CreateDowntimeReport(this.form.value);
-      var totalDowntime:moment.Moment = moment(0).subtract(1, 'hour').add(downtimeReport.totalDowntime, 'minutes');
-
-      downtimeReport.totalDowntime = totalDowntime.utcOffset(0, true).format('HH:mm:ss');
-      downtimeReport.workstation = this.workstation.value!;
-      
-      this._downtimeReportService.postDowntimeReport(downtimeReport).subscribe({
-        next:(val:any) => {
-          alert("Downtime report created succesfully!");
-          this._dialogRef.close(true);
-        },
-        error:(err:any) => {
-          console.log(err);
-        }
-      })
+    try {
+      if(this.form.valid)
+      {
+        this.form.patchValue({
+          timeStarted: this.timeStarted.utcOffset(0, true).format(),
+          timeFinished: this.timeFinished.utcOffset(0, true).format()
+        });
+  
+        var downtimeReport: CreateDowntimeReport = new CreateDowntimeReport(this.form.value);
+        var totalDowntime:moment.Moment = moment(0).subtract(1, 'hour').add(downtimeReport.totalDowntime, 'minutes');
+  
+        downtimeReport.totalDowntime = totalDowntime.utcOffset(0, true).format('HH:mm:ss');
+        downtimeReport.workstation = this.workstation.value!;
+        
+        this._downtimeReportService.postDowntimeReport(downtimeReport).subscribe({
+          next:(val:any) => {
+            alert("Downtime report created succesfully!");
+            this._dialogRef.close(true);
+          },
+          error:(err:HttpErrorResponse) => {
+            console.log(err);
+            alert(err.error + "\n" + err.message);
+          }
+        })
+      }
+    }
+    catch(e) {
+      alert(e);
     }
   }
 
